@@ -1,6 +1,7 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
+    id "edu.wpi.first.GradleRIO" version "2022.4.1"
 }
 
 sourceCompatibility = JavaVersion.VERSION_11
@@ -25,6 +26,9 @@ allprojects {
 
 dependencies {
     implementation 'edu.wpi.first.wpilibj:wpilibj-java:2022.1.1'
+
+    implementation wpi.java.deps.wpilib()
+    implementation wpi.java.vendor.java()
 
     // CTRE is implementation because it is not a hard requirement
     implementation 'com.ctre.phoenix:api-java:5.20.2'
