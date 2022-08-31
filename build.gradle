@@ -49,6 +49,6 @@ publishing {
     }
 }
 
-test {
-    useJUnitPlatform()
-}
+// test {
+//     useJUnitPlatform()
+// }

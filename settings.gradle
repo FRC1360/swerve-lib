@@ -5,7 +5,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'swerve-lib'
+rootProject.name = 'swerve-lib-1360'
 
 include(
         ':examples:mk3-minibot',
