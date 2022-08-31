@@ -9,7 +9,7 @@
   "jsonUrl": "https://raw.githubusercontent.com/FRC1360/swerve-lib-1360/develop/SdsSwerveLib.json",
   "javaDependencies": [
     {
-      "groupId": "com.github.SwerveDriveSpecialties",
+      "groupId": "com.github.FRC1360",
       "artifactId": "swerve-lib-1360",
       "version": "1.1.0"
     }
