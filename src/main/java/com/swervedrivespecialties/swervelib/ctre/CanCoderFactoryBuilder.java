@@ -10,6 +10,8 @@ import com.swervedrivespecialties.swervelib.AbsoluteEncoderFactory;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DutyCycle;
 
+import edu.wpi.first.wpilibj.DriverStation;
+
 public class CanCoderFactoryBuilder {
     private Direction direction = Direction.COUNTER_CLOCKWISE;
     private int periodMilliseconds = 10;
@@ -67,6 +69,8 @@ public class CanCoderFactoryBuilder {
         private final DutyCycle encoder;
 
         private OrbitEncoderImplementation(int port) {
+            String message = "Hello from OrbitEncoderImplementation!";
+            DriverStation.reportWarning(String.format("%s", message), false);
             this.dio = new DigitalInput(port);
             this.encoder = new DutyCycle(this.dio);
         }
