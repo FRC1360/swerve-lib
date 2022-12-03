@@ -28,7 +28,7 @@ public class CanCoderFactoryBuilder {
 
     public AbsoluteEncoderFactory<CanCoderAbsoluteConfiguration> build() {
         return configuration -> {
-            CANCoderConfiguration config = new CANCoderConfiguration();
+            //CANCoderConfiguration config = new CANCoderConfiguration();
             /*config.absoluteSensorRange = AbsoluteSensorRange.Unsigned_0_to_360;
             config.magnetOffsetDegrees = Math.toDegrees(configuration.getOffset());
             config.sensorDirection = direction == Direction.CLOCKWISE;
@@ -39,7 +39,7 @@ public class CanCoderFactoryBuilder {
             CtreUtils.checkCtreError(encoder.setStatusFramePeriod(CANCoderStatusFrame.SensorData, periodMilliseconds, 250), "Failed to configure CANCoder update rate");
 
             return new EncoderImplementation(encoder);*/
-            return new OrbitEncoderImplementation(0); // TODO - Replace with port
+            return new OrbitEncoderImplementation(configuration.getId());
         };
     }
 
