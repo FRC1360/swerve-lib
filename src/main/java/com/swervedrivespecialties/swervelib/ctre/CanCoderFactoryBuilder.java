@@ -101,7 +101,14 @@ public class CanCoderFactoryBuilder {
             //double angle = (360.0 / 4096.0) * position + 180.0;
             //return Math.toRadians(angle);
 
-            return 360.0 * encoder.getOutput();
+            double angle = Math.toRadians(360.0 * encoder.getOutput());
+
+            angle %= 2.0 * Math.PI;
+            if (angle < 0.0) {
+                angle += 2.0 * Math.PI;
+            }
+
+            return angle;
         }
         
     }
