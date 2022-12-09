@@ -97,9 +97,11 @@ public class CanCoderFactoryBuilder {
 
         @Override
         public double getAbsoluteAngle() {
-            int position = getAbsolutePosition();
-            double angle = (360.0 / 4096.0) * position + 180.0;
-            return Math.toRadians(angle);
+            //int position = getAbsolutePosition();
+            //double angle = (360.0 / 4096.0) * position + 180.0;
+            //return Math.toRadians(angle);
+
+            return 360.0 * encoder.getOutput();
         }
         
     }
