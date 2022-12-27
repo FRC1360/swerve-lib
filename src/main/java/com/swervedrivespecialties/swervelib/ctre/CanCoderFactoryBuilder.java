@@ -39,7 +39,7 @@ public class CanCoderFactoryBuilder {
             CtreUtils.checkCtreError(encoder.setStatusFramePeriod(CANCoderStatusFrame.SensorData, periodMilliseconds, 250), "Failed to configure CANCoder update rate");
 
             return new EncoderImplementation(encoder);*/
-            return new OrbitEncoderImplementation(configuration.getId());
+            return new OrbitEncoderImplementation(configuration.getId(), configuration.getOffset());
         };
     }
 
@@ -68,11 +68,14 @@ public class CanCoderFactoryBuilder {
         private final DigitalInput dio;
         private final DutyCycle encoder;
 
-        private OrbitEncoderImplementation(int port) {
+        private double offset;
+
+        private OrbitEncoderImplementation(int port, double offset) {
             String message = "Hello from OrbitEncoderImplementation!";
             DriverStation.reportWarning(String.format("%s", message), false);
             this.dio = new DigitalInput(port);
             this.encoder = new DutyCycle(this.dio);
+            this.offset = offset;
         }
 
         private int getAbsolutePosition() {
@@ -101,7 +104,7 @@ public class CanCoderFactoryBuilder {
             //double angle = (360.0 / 4096.0) * position + 180.0;
             //return Math.toRadians(angle);
 
-            double angle = Math.toRadians(360.0 * encoder.getOutput());
+            double angle = Math.toRadians(360.0 * encoder.getOutput()) + this.offset;
 
             angle %= 2.0 * Math.PI;
             if (angle < 0.0) {
