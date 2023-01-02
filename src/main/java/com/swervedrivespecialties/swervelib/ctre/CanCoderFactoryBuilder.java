@@ -114,6 +114,7 @@ public class CanCoderFactoryBuilder {
                 angle += Math.PI;
             }
 
+            angle %= 2.0 * Math.PI;
             if (angle < 0.0) {
                 angle += 2.0 * Math.PI;
             }
