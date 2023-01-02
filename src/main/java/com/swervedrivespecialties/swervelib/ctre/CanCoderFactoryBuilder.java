@@ -108,13 +108,13 @@ public class CanCoderFactoryBuilder {
 
             double angle = Math.toRadians(360.0 * encoder.getOutput()) + this.offset;
 
-            angle %= 2.0 * Math.PI;
-
             if(direction == Direction.CLOCKWISE) {
-                angle += Math.PI;
+                angle = Math.toRadians(360.0 * (1.0 - encoder.getOutput())) - this.offset;
             }
 
+
             angle %= 2.0 * Math.PI;
+
             if (angle < 0.0) {
                 angle += 2.0 * Math.PI;
             }
