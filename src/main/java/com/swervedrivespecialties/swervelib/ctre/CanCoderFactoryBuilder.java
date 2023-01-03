@@ -39,7 +39,8 @@ public class CanCoderFactoryBuilder {
             CtreUtils.checkCtreError(encoder.setStatusFramePeriod(CANCoderStatusFrame.SensorData, periodMilliseconds, 250), "Failed to configure CANCoder update rate");
 
             return new EncoderImplementation(encoder);*/
-            return new OrbitEncoderImplementation(configuration.getId(), configuration.getOffset(), direction);
+
+            return new OrbitEncoderImplementation(configuration.getId(), configuration.getOffset());
         };
     }
 
@@ -69,49 +70,16 @@ public class CanCoderFactoryBuilder {
         private final DutyCycle encoder;
 
         private double offset;
-        private Direction direction;
 
-        private OrbitEncoderImplementation(int port, double offset, Direction direction) {
-            String message = "Hello from OrbitEncoderImplementation!";
-            DriverStation.reportWarning(String.format("%s", message), false);
+        private OrbitEncoderImplementation(int port, double offset) {
             this.dio = new DigitalInput(port);
             this.encoder = new DutyCycle(this.dio);
             this.offset = offset;
-            this.direction = direction;
-        }
-
-        private int getAbsolutePosition() {
-            int position = (int) Math.round(encoder.getOutput());
-
-            if(position < 0) {
-                position = 0;
-            } else if (position > 4095) {
-                position = 4095;
-            }
-
-            position -= 2048;
-
-            if(position > 2047) {
-                position -=4096;
-            } else if(position < -2048) {
-                position += 4096;
-            }
-
-            return position;
         }
 
         @Override
         public double getAbsoluteAngle() {
-            //int position = getAbsolutePosition();
-            //double angle = (360.0 / 4096.0) * position + 180.0;
-            //return Math.toRadians(angle);
-
             double angle = Math.toRadians(360.0 * encoder.getOutput()) + this.offset;
-
-            if(direction == Direction.CLOCKWISE) {
-                angle = Math.toRadians(360.0 * (1.0 - encoder.getOutput())) + this.offset;
-            }
-
 
             angle %= 2.0 * Math.PI;
 
